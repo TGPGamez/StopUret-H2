@@ -41,6 +41,12 @@ namespace StopUret_H2
             countdown.Priority = ThreadPriority.Normal;
         }
 
+        /// <summary>
+        /// Sets the fulltime of countdown
+        /// </summary>
+        /// <param name="hours"></param>
+        /// <param name="minutes"></param>
+        /// <param name="seconds"></param>
         public void SetTime(double hours = 0, double minutes = 0, double seconds = 0)
         {
             double newTime = (hours * 3600) + (minutes * 60) + seconds;
@@ -76,6 +82,9 @@ namespace StopUret_H2
             }
         }
 
+        /// <summary>
+        /// Stops the countdown
+        /// </summary>
         public void Stop()
         {
             if (!isStopped)
@@ -84,6 +93,10 @@ namespace StopUret_H2
             }
         }
 
+
+        /// <summary>
+        /// Starts the countdown
+        /// </summary>
         public void Start()
         {
             if (!isStarted)

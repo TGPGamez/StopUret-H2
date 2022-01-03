@@ -27,12 +27,19 @@ namespace StopUret_H2
         public MainWindow()
         {
             InitializeComponent();
+            ///Initialize our timer with default input
             timer = new Timer(60, false);
+            //Assign event
             timer.TimeUpdate += UpdateTimerDisplay;
         }
 
+        /// <summary>
+        /// Updates display
+        /// </summary>
+        /// <param name="time"></param>
         private void UpdateTimerDisplay(string time)
         {
+            //Need to dispatcher to access UI thread
             Dispatcher.Invoke(() =>
             {
                 timeLeftDisplay.Content = time;
@@ -40,13 +47,23 @@ namespace StopUret_H2
             
         }
 
-
+        /// <summary>
+        /// Validates if type character is a numeric
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = false;
         }
 
+
+        /// <summary>
+        /// Start timer button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartTimer_Click(object sender, RoutedEventArgs e)
         {
             if (!timer.isStarted && timer.FullTime > 0)
@@ -59,11 +76,21 @@ namespace StopUret_H2
             }
         }
 
+        /// <summary>
+        /// Stop timer button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StopTimer_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
         }
 
+        /// <summary>
+        /// Set timer button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SetTimer_Click(object sender, RoutedEventArgs e)
         {
             if (timer.isStopped || !timer.isStarted)
