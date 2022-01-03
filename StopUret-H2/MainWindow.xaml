@@ -1,0 +1,38 @@
+﻿<Window x:Class="StopUret_H2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StopUret_H2"
+        xmlns:ControlLib="clr-namespace:ControlLib;assembly=NumericUpDown"
+        mc:Ignorable="d"
+        Title="StopUr" Height="450" Width="800" Icon="Icons/stopwatch.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="5">
+            <ControlLib:NumericUpDown x:Name="timeHours" Increment="1" Width="50" MaxValue="23"/>
+            <ControlLib:NumericUpDown x:Name="timeMinutes" Increment="1" Margin="5,0,0,0" Width="50" MaxValue="59"/>
+            <ControlLib:NumericUpDown x:Name="timeSeconds" Increment="1" Margin="5,0,0,0" Width="50" MaxValue="59"/>
+        </StackPanel>
+        <Button Grid.Row="0" Grid.Column="1"
+                Width="70" Margin="5,10,10,10" Content="Set time"
+                HorizontalAlignment="Left" Click="SetTimer_Click"/>
+
+        <Button Content="Start" Grid.Column="0" Grid.Row="2" Margin="5" Click="StartTimer_Click"/>
+        <Button Content="Stop" Grid.Column="0" Grid.Row="3" Margin="5" Click="StopTimer_Click"/>
+
+        <Label Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"
+               x:Name="timeLeftDisplay" FontSize="20"/>
+
+    </Grid>
+</Window>
