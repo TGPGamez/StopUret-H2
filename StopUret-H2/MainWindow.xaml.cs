@@ -37,11 +37,10 @@ namespace StopUret_H2
         /// Updates display
         /// </summary>
         /// <param name="time"></param>
-        private void UpdateTimerDisplay(string time)
         private void UpdateTimerDisplay()
         {
-            //Need to dispatcher to access UI thread
             string time = convertToTimeDisplay();
+            //Need to dispatcher to access UI thread
             Dispatcher.Invoke(() =>
             {
                 timeLeftDisplay.Content = time;
