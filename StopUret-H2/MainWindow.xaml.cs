@@ -27,12 +27,20 @@ namespace StopUret_H2
         public MainWindow()
         {
             InitializeComponent();
+            ///Initialize our timer with default input
             timer = new Timer(60, false);
+            //Assign event
             timer.TimeUpdate += UpdateTimerDisplay;
         }
 
+        /// <summary>
+        /// Updates display
+        /// </summary>
+        /// <param name="time"></param>
+        private void UpdateTimerDisplay(string time)
         private void UpdateTimerDisplay()
         {
+            //Need to dispatcher to access UI thread
             string time = convertToTimeDisplay();
             Dispatcher.Invoke(() =>
             {
@@ -74,6 +82,11 @@ namespace StopUret_H2
         }
 
         /// <summary>
+        /// Validates if type character is a numeric
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <summary>
         /// Used to add a 0 infront of numb if under 10
         /// </summary>
         /// <param name="numb"></param>
@@ -89,6 +102,12 @@ namespace StopUret_H2
             e.Handled = false;
         }
 
+
+        /// <summary>
+        /// Start timer button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartTimer_Click(object sender, RoutedEventArgs e)
         {
             if (!timer.isStarted && timer.FullTime > 0)
@@ -101,11 +120,21 @@ namespace StopUret_H2
             }
         }
 
+        /// <summary>
+        /// Stop timer button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StopTimer_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
         }
 
+        /// <summary>
+        /// Set timer button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SetTimer_Click(object sender, RoutedEventArgs e)
         {
             if (timer.isStopped || !timer.isStarted)
