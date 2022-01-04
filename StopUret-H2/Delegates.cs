@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace StopUret_H2
 {
-    public delegate void TimeUpdateEvent(string time);
+    public delegate void TimeUpdateEvent();
 }

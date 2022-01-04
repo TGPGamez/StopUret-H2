@@ -59,13 +59,13 @@ namespace StopUret_H2
                 //Checks if timer is stopped
                 if (!isStopped)
                 {
-                    TimeUpdate?.Invoke(convertToTimeDisplay());
+                    TimeUpdate?.Invoke();
                     Thread.Sleep(1000);
                     //If timer is done, then play finish sound
                     if (FullTime == 0)
                     {
                         isStopped = true;
-                        TimeUpdate?.Invoke(convertToTimeDisplay());
+                        TimeUpdate?.Invoke();
                         sp.PlaySync();
                     } 
                     else
@@ -98,45 +98,12 @@ namespace StopUret_H2
         }
 
         /// <summary>
-        /// Used to convert fullTime into timespan format display
+        /// Returns the fulltime left
         /// </summary>
-        /// <returns>Time in display form</returns>
-        private string convertToTimeDisplay()
-        {
-            int hoursLeft = 0;
-            int minutesLeft = 0;
-            int fullTime = (int)FullTime;
-            if (fullTime >= 3600)
-            {
-                //Find how many hours is left 
-                //3600 is 1 hour in seconds
-                //Alternative you could do modulus
-                hoursLeft = fullTime / 3600;
-                fullTime -= hoursLeft * 3600;
-            }
-            if (fullTime >= 60)
-            {
-                //Find how many minutes left
-                //Alternative you could do modulus
-                minutesLeft = fullTime / 60;
-                fullTime -= minutesLeft * 60;
-            }
-            //Rest is seconds
-            int secondsLeft = fullTime;
-            
-            return fullTime >= 0 && !isStopped
-                ? $"{AddZeroToNumber(hoursLeft)}:{AddZeroToNumber(minutesLeft)}:{AddZeroToNumber(secondsLeft)}"
-                : "Done";
-        }
-
-        /// <summary>
-        /// Used to add a 0 infront of numb if under 10
-        /// </summary>
-        /// <param name="numb"></param>
         /// <returns></returns>
-        private string AddZeroToNumber(int numb)
+        public double GetTime()
         {
-            return numb > 9 ? "" + numb : "0" + numb;
+            return FullTime;
         }
 
         /// <summary>

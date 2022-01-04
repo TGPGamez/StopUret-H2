@@ -31,8 +31,9 @@ namespace StopUret_H2
             timer.TimeUpdate += UpdateTimerDisplay;
         }
 
-        private void UpdateTimerDisplay(string time)
+        private void UpdateTimerDisplay()
         {
+            string time = convertToTimeDisplay();
             Dispatcher.Invoke(() =>
             {
                 timeLeftDisplay.Content = time;
@@ -40,6 +41,47 @@ namespace StopUret_H2
             
         }
 
+        /// <summary>
+        /// Used to convert fulltime from timer to displayable time
+        /// </summary>
+        /// <returns></returns>
+        private string convertToTimeDisplay()
+        {
+            int hoursLeft = 0;
+            int minutesLeft = 0;
+            int fullTime = (int)timer.FullTime;
+            if (fullTime >= 3600)
+            {
+                //Find how many hours is left 
+                //3600 is 1 hour in seconds
+                //Alternative you could do modulus
+                hoursLeft = fullTime / 3600;
+                fullTime -= hoursLeft * 3600;
+            }
+            if (fullTime >= 60)
+            {
+                //Find how many minutes left
+                //Alternative you could do modulus
+                minutesLeft = fullTime / 60;
+                fullTime -= minutesLeft * 60;
+            }
+            //Rest is seconds
+            int secondsLeft = fullTime;
+
+            return fullTime >= 0 && !timer.isStopped
+                ? $"{AddZeroToNumber(hoursLeft)}:{AddZeroToNumber(minutesLeft)}:{AddZeroToNumber(secondsLeft)}"
+                : "Done";
+        }
+
+        /// <summary>
+        /// Used to add a 0 infront of numb if under 10
+        /// </summary>
+        /// <param name="numb"></param>
+        /// <returns></returns>
+        private string AddZeroToNumber(int numb)
+        {
+            return numb > 9 ? "" + numb : "0" + numb;
+        }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
